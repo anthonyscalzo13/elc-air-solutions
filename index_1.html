@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ELC Air Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F6;
+    --surface:#FFFFFF;
+    --surface-2:#E4EAF0;
+    --ink:#142132;
+    --ink-soft:#4C5D70;
+    --ink-faint:#7488999c;
+    --blue:#1B4D8C;
+    --blue-deep:#0E2A54;
+    --blue-deeper:#0A1E3E;
+    --red:#C23B2E;
+    --amber:#C9821F;
+    --line: rgba(20,33,50,0.12);
+    --line-strong: rgba(20,33,50,0.22);
+    --on-blue: #F2F6FB;
+    --on-blue-soft: rgba(242,246,251,0.72);
+    --shadow: 0 18px 40px -22px rgba(14,42,84,0.35);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0A1420;
+      --surface:#0F1D2C;
+      --surface-2:#152840;
+      --ink:#E8EEF5;
+      --ink-soft:#A9BACB;
+      --ink-faint:#7488999c;
+      --blue:#6FA0DE;
+      --blue-deep:#12295099;
+      --blue-deeper:#08131F;
+      --red:#E37A6C;
+      --amber:#E7A94E;
+      --line: rgba(232,238,245,0.14);
+      --line-strong: rgba(232,238,245,0.24);
+      --on-blue:#EEF3FA;
+      --on-blue-soft: rgba(238,243,250,0.72);
+      --shadow: 0 18px 44px -20px rgba(0,0,0,0.55);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0A1420;
+    --surface:#0F1D2C;
+    --surface-2:#152840;
+    --ink:#E8EEF5;
+    --ink-soft:#A9BACB;
+    --ink-faint:#7488999c;
+    --blue:#6FA0DE;
+    --blue-deep:#12295099;
+    --blue-deeper:#08131F;
+    --red:#E37A6C;
+    --amber:#E7A94E;
+    --line: rgba(232,238,245,0.14);
+    --line-strong: rgba(232,238,245,0.24);
+    --on-blue:#EEF3FA;
+    --on-blue-soft: rgba(238,243,250,0.72);
+    --shadow: 0 18px 44px -20px rgba(0,0,0,0.55);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-inline:0;
+  }
+  img{max-width:100%; display:block;}
+  [hidden]{display:none!important;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:"Big Shoulders Display", "Arial Narrow", sans-serif; text-wrap:balance; margin:0; letter-spacing:0.01em;}
+  p{margin:0;}
+  .wrap{max-width:1120px; margin-inline:auto; padding-inline:24px;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .rise{animation: rise 0.7s cubic-bezier(.2,.7,.2,1) backwards;}
+  }
+  @keyframes rise{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:40;
+    padding-top:calc(env(safe-area-inset-top,0px) + 12px);
+    padding-bottom:12px;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px) saturate(1.1);
+    border-bottom:1px solid var(--line);
+  }
+  .header-row{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; min-width:0;}
+  .brand img{height:38px; width:auto; flex:none;}
+  .brand-word{
+    font-family:"Big Shoulders Display", sans-serif;
+    font-weight:800;
+    font-size:1.28rem;
+    line-height:1;
+    color:var(--blue);
+    letter-spacing:0.01em;
+    white-space:nowrap;
+  }
+  .brand-word span{color:var(--red);}
+  .call-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--blue); color:var(--on-blue);
+    padding:10px 18px; border-radius:999px;
+    font-weight:700; font-size:0.94rem; white-space:nowrap;
+    text-decoration:none;
+    box-shadow:var(--shadow);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .call-pill:hover{transform:translateY(-1px);}
+  .call-pill svg{width:16px; height:16px; flex:none;}
+  .call-pill .num{display:inline;}
+  @media (max-width:480px){
+    .call-pill .num{display:none;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding-block: 56px 40px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-icon-bg{
+    position:absolute;
+    right:-9%; top:-14%;
+    width:52%;
+    max-width:520px;
+    opacity:0.08;
+    pointer-events:none;
+    transform:rotate(6deg);
+  }
+  :root[data-theme="dark"] .hero-icon-bg,
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .hero-icon-bg{opacity:0.14;} }
+  .hero-grid{
+    position:relative;
+    display:grid;
+    gap:28px;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.76rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--blue);
+  }
+  .eyebrow::before{
+    content:""; width:18px; height:2px; background:var(--red); display:inline-block; border-radius:2px;
+  }
+  .hero h1{
+    font-size:clamp(2.5rem, 6.4vw, 4.4rem);
+    font-weight:800;
+    line-height:0.98;
+    margin-top:14px;
+    color:var(--ink);
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--blue);
+  }
+  .hero p.lede{
+    margin-top:18px;
+    font-size:1.1rem;
+    line-height:1.55;
+    color:var(--ink-soft);
+    max-width:46ch;
+  }
+  .cta-row{
+    display:flex; flex-wrap:wrap; gap:12px; margin-top:26px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:13px 22px; border-radius:12px;
+    font-weight:700; font-size:0.98rem;
+    text-decoration:none;
+    border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn svg{width:18px; height:18px; flex:none;}
+  .btn-primary{background:var(--blue); color:var(--on-blue); box-shadow:var(--shadow);}
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-ghost{
+    background:transparent; color:var(--ink); border-color:var(--line-strong);
+  }
+  .btn-ghost:hover{border-color:var(--blue); color:var(--blue);}
+
+  /* ---------- Trust strip ---------- */
+  .trust{
+    padding-block:44px;
+    border-bottom:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .trust-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+  }
+  .trust-item{
+    background:var(--surface);
+    padding:26px 24px 24px;
+    border-radius:16px;
+    border-top:4px solid var(--accent, var(--blue));
+    box-shadow:var(--shadow);
+  }
+  .trust-item:nth-child(1){--accent:var(--blue);}
+  .trust-item:nth-child(2){--accent:var(--red);}
+  .trust-item:nth-child(3){--accent:var(--amber);}
+  .trust-icon-chip{
+    width:48px; height:48px; border-radius:12px;
+    background:var(--accent, var(--blue));
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:14px;
+  }
+  .trust-item svg{width:24px; height:24px; flex:none; color:var(--on-blue);}
+  .trust-item h3{
+    font-family:"Big Shoulders Display", sans-serif;
+    font-size:1.28rem; font-weight:700; color:var(--ink);
+    text-transform:none; letter-spacing:0.005em;
+  }
+  .trust-item p{font-size:0.9rem; color:var(--ink-soft); margin-top:6px; line-height:1.45;}
+  @media (max-width:760px){
+    .trust-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Services ---------- */
+  .services{padding-block:56px; border-bottom:1px solid var(--line);}
+  .section-head{max-width:56ch; margin-bottom:34px;}
+  .section-head h2{font-size:clamp(1.9rem,4vw,2.6rem); font-weight:800;}
+  .section-head p{margin-top:10px; color:var(--ink-soft); font-size:1.02rem; line-height:1.5;}
+
+  .svc-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:14px;
+  }
+  @media (max-width:700px){ .svc-grid{grid-template-columns:1fr;} }
+  .svc-card{
+    display:flex; gap:16px;
+    padding:20px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+  .svc-icon{
+    flex:none; width:44px; height:44px; border-radius:11px;
+    background:var(--blue-deep);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .svc-icon svg{width:22px; height:22px; color:var(--on-blue);}
+  .svc-card h3{
+    font-family:"Public Sans", sans-serif; font-weight:800; font-size:1.02rem; color:var(--ink);
+  }
+  .svc-card p{margin-top:5px; font-size:0.9rem; line-height:1.45; color:var(--ink-soft);}
+
+  /* ---------- Meet Eduardo ---------- */
+  .meet{
+    padding-block:52px;
+    border-bottom:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .meet-inner{
+    display:grid;
+    grid-template-columns: minmax(260px, 360px) 1fr;
+    gap:52px;
+    align-items:center;
+  }
+  @media (max-width:760px){
+    .meet-inner{grid-template-columns:1fr;}
+  }
+  .meet-photo{
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+    max-width:360px;
+  }
+  @media (max-width:760px){
+    .meet-photo{max-width:280px; margin-inline:auto;}
+  }
+  .meet-photo img{width:100%; display:block;}
+  .meet-text{
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  @media (max-width:760px){
+    .meet-text{text-align:center; align-items:center;}
+  }
+  .meet-text h2{font-size:clamp(1.9rem, 3.4vw, 2.5rem);}
+  .meet-text p.lede{margin-top:14px; font-size:1.06rem; line-height:1.6; color:var(--ink-soft); max-width:42ch;}
+  .meet-stat{
+    display:flex; align-items:baseline; gap:14px;
+    margin-top:28px; padding-top:24px;
+    border-top:1px solid var(--line-strong);
+  }
+  @media (max-width:760px){ .meet-stat{justify-content:center;} }
+  .meet-stat .num{
+    font-family:"Big Shoulders Display", sans-serif;
+    font-size:3.4rem; font-weight:800; line-height:0.85; color:var(--blue);
+  }
+  .meet-stat .label{
+    font-size:0.8rem; font-weight:700; color:var(--ink-soft);
+    text-transform:uppercase; letter-spacing:0.05em; line-height:1.4; max-width:22ch;
+  }
+  .meet-tag{
+    margin-top:20px;
+    font-family:"Big Shoulders Display", sans-serif;
+    font-weight:700; font-size:1.5rem; line-height:1.15; color:var(--blue);
+    max-width:26ch;
+  }
+  .meet-tag .q{color:var(--red);}
+  .meet-tag .u{text-decoration:underline; text-decoration-color:var(--red); text-decoration-thickness:3px; text-underline-offset:5px;}
+  @media (max-width:760px){ .meet-tag{margin-inline:auto;} }
+
+  /* ---------- Final CTA ---------- */
+  .close-cta{padding-block:56px 64px;}
+  .close-inner{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:44px 36px;
+    text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .close-inner h2{font-size:clamp(1.9rem,4.4vw,2.7rem); font-weight:800;}
+  .close-inner p{margin-top:12px; color:var(--ink-soft); font-size:1.02rem;}
+  .close-btns{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:26px;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding-block:32px;
+    background:var(--paper);
+  }
+  .foot-row{
+    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .foot-brand{display:flex; align-items:center; gap:12px;}
+  .foot-brand img{height:30px; width:auto;}
+  .foot-brand .fb-text{font-size:0.82rem; color:var(--ink-soft); line-height:1.4;}
+  .foot-brand .fb-text strong{display:block; color:var(--ink); font-weight:800; font-size:0.92rem;}
+  .foot-links{display:flex; gap:18px; flex-wrap:wrap; font-size:0.86rem;}
+  .foot-links a{text-decoration:none; color:var(--ink-soft);}
+  .foot-links a:hover{color:var(--blue);}
+  .foot-legal{
+    margin-top:22px; padding-top:18px; border-top:1px solid var(--line);
+    font-size:0.78rem; color:var(--ink-faint); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap header-row">
+    <div class="brand">
+      <img src="icon.png" alt="ELC Air Solutions icon" />
+      <span class="brand-word">ELC <span>AIR SOLUTIONS</span></span>
+    </div>
+    <a class="call-pill" href="tel:+19173180124">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="num">(917) 318-0124</span>
+      <span class="hide-desktop" style="display:none;">Call</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <img class="hero-icon-bg" src="icon.png" alt="" />
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow rise" style="animation-delay:.02s">Family-Owned AC &amp; Air Quality</p>
+        <h1 class="rise" style="animation-delay:.08s">Licensed, insured, and in your <em>neighborhood</em> since 2009.</h1>
+        <p class="lede rise" style="animation-delay:.16s">Eduardo and the ELC Air Solutions team keep homes cool and breathing easy — honest work, fast response, and a name neighbors actually trust.</p>
+        <div class="cta-row rise" style="animation-delay:.24s">
+          <a class="btn btn-primary" href="tel:+19173180124">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call (917) 318-0124
+          </a>
+          <a class="btn btn-ghost" href="https://wa.me/19173180124" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.92L2 22l5.31-1.39a9.87 9.87 0 0 0 4.73 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.35-.5.05-.98.24-3.28-.68-2.78-1.11-4.57-3.93-4.71-4.11-.14-.18-1.13-1.5-1.13-2.86 0-1.36.71-2.03.97-2.3.24-.26.53-.33.71-.33h.5c.16 0 .38-.03.58.44.24.57.79 1.97.86 2.11.07.14.11.31.02.5-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.73 1.2 1.57 1.95 1.08.96 1.98 1.26 2.27 1.4.29.14.46.12.63-.07.18-.2.75-.87.95-1.17.2-.29.4-.24.66-.14.27.09 1.7.8 1.99.95.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="wrap">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 5-3.4 8.4-7 10-3.6-1.6-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Licensed &amp; Insured</h3>
+          <p>CAC #ABC1234567 — your home and your investment, protected on every job.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l9-7 9 7v11"/><path d="M9 21v-8h6v8"/></svg></div>
+          <h3>Family-Owned Since 2009</h3>
+          <p>One team, no subcontractors — the same family you called last time.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+          <h3>24-Hour Response</h3>
+          <p>Emergencies don't wait for business hours. Neither do we.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What We Do</p>
+        <h2>Full-service cooling<br>&amp; air quality.</h2>
+        <p>One team, start to finish — no subcontractors, no guesswork.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4.5 6l15 12M19.5 6l-15 12M2 12h20"/></svg></div>
+          <div><h3>AC Tune-Ups</h3><p>Catch small issues before they become big bills.</p></div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/><path d="M12 8v4l3 2"/><path d="M12 2v2M12 20v2"/></svg></div>
+          <div><h3>Preventative Maintenance</h3><p>Scheduled care, fewer surprises, lower costs.</p></div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+          <div><h3>Emergency Repairs</h3><p>Fast fixes when your AC won't wait.</p></div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l9-7 9 7v11"/><path d="M9 21v-6h6v6"/><path d="M9 13l1.5 1.5L14 11"/></svg></div>
+          <div><h3>AC Installs &amp; Repairs</h3><p>Sized and installed right — the first time.</p></div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/><path d="M12 4.5v2M19.5 12h-2M12 19.5v-2M4.5 12h2"/></svg></div>
+          <div><h3>Smart Thermostat Install</h3><p>One touch for the perfect temperature, lower bills included.</p></div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <div><h3>Mold Inspection</h3><p>Protecting the air you breathe, not just the system.</p></div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 4 5 7.5 5 10.5a5 5 0 0 1-10 0C7 9.5 9 6 12 2z"/></svg></div>
+          <div><h3>PVC Drain Flushout</h3><p>Clearing lines before a clog becomes water damage.</p></div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 13.5A4 4 0 0 1 7 6a5 5 0 0 1 9.6-1.5A3.5 3.5 0 0 1 16.5 12"/><path d="M12 13.5c1 1.3 1.6 2.2 1.6 3a1.6 1.6 0 0 1-3.2 0c0-.8.6-1.7 1.6-3z"/></svg></div>
+          <div><h3>Humidifiers &amp; Dehumidifiers</h3><p>Balanced humidity for healthier, more comfortable air.</p></div>
+        </div>
+        <div class="svc-card" style="grid-column: span 2;">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l2-5 4 10 2-5h4"/></svg></div>
+          <div><h3>Air Quality Products</h3><p>Filtration that makes your indoor air noticeably cleaner.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="meet">
+    <div class="wrap meet-inner">
+      <div class="meet-photo">
+        <img src="eduardo.jpg" alt="Eduardo, owner of ELC Air Solutions" />
+      </div>
+      <div class="meet-text">
+        <p class="eyebrow">Owner-Operated</p>
+        <h2>Eduardo answers<br>the phone.</h2>
+        <p class="lede">No call center, no rotating crew — every job runs through the same licensed tech neighbors have trusted since 2009.</p>
+        <p class="meet-tag"><span class="q">&ldquo;</span>Good people keep things <span class="u">cool.</span></p>
+        <div class="meet-stat">
+          <span class="num">17</span>
+          <span class="label">Years in Business</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="close-cta">
+    <div class="wrap">
+      <div class="close-inner">
+        <p class="eyebrow" style="justify-content:center;">Let's Get You Comfortable</p>
+        <h2>Reach out — we respond fast.</h2>
+        <p>Call, message us on WhatsApp, or send an email. Eduardo's team typically responds within 24 hours.</p>
+        <div class="close-btns">
+          <a class="btn btn-primary" href="tel:+19173180124">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (917) 318-0124
+          </a>
+          <a class="btn btn-ghost" href="https://wa.me/19173180124" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.92L2 22l5.31-1.39a9.87 9.87 0 0 0 4.73 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.35-.5.05-.98.24-3.28-.68-2.78-1.11-4.57-3.93-4.71-4.11-.14-.18-1.13-1.5-1.13-2.86 0-1.36.71-2.03.97-2.3.24-.26.53-.33.71-.33h.5c.16 0 .38-.03.58.44.24.57.79 1.97.86 2.11.07.14.11.31.02.5-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.73 1.2 1.57 1.95 1.08.96 1.98 1.26 2.27 1.4.29.14.46.12.63-.07.18-.2.75-.87.95-1.17.2-.29.4-.24.66-.14.27.09 1.7.8 1.99.95.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+            WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="mailto:test@test.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="foot-brand">
+        <img src="icon.png" alt="ELC Air Solutions icon" style="height:34px;" />
+        <span class="fb-text"><strong>ELC Air Solutions</strong>Heating, Cooling &amp; Air Quality Specialist</span>
+      </div>
+      <div class="foot-links">
+        <a href="tel:+19173180124">(917) 318-0124</a>
+        <a href="https://wa.me/19173180124" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:test@test.com">test@test.com</a>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>&copy; 2026 ELC Air Solutions. Licensed &amp; insured &mdash; CAC #ABC1234567.</span>
+      <span>Built with care for families who trust us to keep them comfortable.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
